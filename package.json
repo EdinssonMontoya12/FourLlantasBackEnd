@@ -1,0 +1,35 @@
+{
+  "name": "fourllantasbackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx nodemon --exec babel-node src/app.js",
+    "start": "npx babel-node ./src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "module-alias": "^2.2.2",
+    "mysql": "^2.18.1",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.2",
+    "@babel/node": "^7.17.10",
+    "@babel/preset-env": "^7.18.2",
+    "nodemon": "^2.0.16"
+  },
+  "_moduleAliases": {
+    "@DB": "./src/database",
+    "@Controller": "./src/controller",
+    "@Router": "./src/routes"
+  }
+}
