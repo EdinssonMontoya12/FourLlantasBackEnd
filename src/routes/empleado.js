@@ -5,7 +5,7 @@ const router = new Router()
 
 router.get('/empleados', mostrarTodo)
 router.get('/empleado/:id', mostrarUno)
-router.post('/empleado/:id', crearUno)
+router.post('/empleado', crearUno)
 router.put('/empleadoDes/:id', desactivarUno)
 //router.put('/empleado/editar', editarUno)
 

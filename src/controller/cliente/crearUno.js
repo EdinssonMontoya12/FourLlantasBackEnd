@@ -1,21 +1,22 @@
 import pool from "@DB/connection"
+import { encryptPassword, matchPassword} from "@Middleware/auth/bcrypt"
 
 export default async (req, res) => {
-    let {nombres, apellidos, correo, contrasena, 
-        telefono, fecha_registro, id_sede, 
-        cedula} = req.body
+    const { cedula, nombre, apellido, telefono, 
+        correo, contrasena, es_flota} = req.body
     let activo = 1
-    let empleado = {
-        nombres, 
-        apellidos, 
-        correo, 
-        contrasena, 
+    let cliente = {
+        id: cedula,
+        nombres: nombre,
+        apellidos: apellido,
         telefono, 
-        fecha_registro,
-        activo, 
-        id_sede, 
-        cedula
+        correo,
+        contrasena,
+        es_flota,
+        activo
     }
-    await pool.query('insert into empelados set ?', [empleado])
-    res.status(200)
+    cliente.contrasena = await encryptPassword(contrasena)
+    await pool.query('insert into clientes set ?', [cliente])
+    delete cliente.contrasena
+    res.status(200).json(cliente)
 }

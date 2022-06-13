@@ -4,25 +4,36 @@ import express from 'express'
 import cors from 'cors'
 //Importar module-alias para implementarlo
 import "module-alias/register"
+//Importar passport para autentificación
+import passport from "passport"
+//Importar configuracion de passport
+import "@Middleware/auth/passport"
 
+//Inicilizar
 const app = express()
 
-//Set port
+//Establecer puerto
 app.set("port", process.env.PORT || 3000)
 
 //Middlewares
+app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(cors({
     origin: '*'
 }))
+app.use(passport.initialize())
 
-//Routes
-import {prueba, empleado} from "@Router"
+//Rutas
+import {cliente, empleado, auth, flota, servicio, vehiculo} from "@Router"
 
-app.use("/api", prueba)
+app.use("/api", cliente)
 app.use("/api", empleado)
+app.use("/api", auth)
+app.use("/api", flota)
+app.use("/api", servicio)
+app.use("/api", vehiculo)
 
-//Server listen
+//iniciar servidor
 app.listen(app.get("port"), () => {
     console.log("Servidor ejecutandose en el puerto:", app.get("port"))
 })

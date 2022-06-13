@@ -1,13 +1,13 @@
 import crearUno from "./crearUno"
 import desactivarUno from "./desactivarUno"
-import mostrarTodo from "./mostrarTodo"
-import mostrarUno from "./mostrarUno"
 //import editarUno from "./editarUno"
+import mostrarUno from "./mostrarUno"
+import mostrarTodo from "./mostrarTodo"
 
 export {
     crearUno,
     desactivarUno,
-    mostrarTodo,
+    //editarUno,
     mostrarUno,
-    //editarUno
+    mostrarTodo
 }

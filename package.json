@@ -30,6 +30,7 @@
   "_moduleAliases": {
     "@DB": "./src/database",
     "@Controller": "./src/controller",
-    "@Router": "./src/routes"
+    "@Router": "./src/routes",
+    "@Middleware": "./src/middleware"
   }
 }

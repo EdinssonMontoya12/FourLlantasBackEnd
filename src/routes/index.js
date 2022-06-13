@@ -1,7 +1,15 @@
 import empleado from "./empleado"
-import prueba from "./prueba"
+import cliente from "./cliente"
+import auth from "./auth"
+import flota from "./flota"
+import servicio from "./servicio"
+import vehiculo from "./vehiculo"
 
 export {
     empleado,
-    prueba
+    cliente,
+    auth,
+    flota,
+    servicio,
+    vehiculo
 }
