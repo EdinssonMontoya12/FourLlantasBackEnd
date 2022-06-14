@@ -26,7 +26,8 @@ export default async (req, res) => {
     if(rol == 0){
         let mecanico = {
             id: id_mecanico,
-            cedula
+            cc_empleado: cedula,
+            activo
         }
         console.log('Es un mecanico')
         console.log(mecanico)
