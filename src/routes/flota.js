@@ -3,10 +3,10 @@ import {mostrarTodo, mostrarUno, crearUno, desactivarUno} from "@Controller/flot
 
 const router = new Router()
 
-router.get('/flotas', mostrarTodo)
-router.get('/flota/:id', mostrarUno)
-router.post('/flota', crearUno)
-router.put('/flotaDes/:id', desactivarUno)
+router.get('/', mostrarTodo)
+router.get('/:id', mostrarUno)
+router.post('/', crearUno)
+router.put('/:id', desactivarUno)
 //router.put('/empleado/editar', editarUno)
 
 export default router

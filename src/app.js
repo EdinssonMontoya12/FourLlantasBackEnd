@@ -9,6 +9,8 @@ import passport from "passport"
 //Importar configuracion de passport
 import "@Middleware/auth/passport"
 
+import router from "@Router"
+
 //Inicilizar
 const app = express()
 
@@ -16,24 +18,18 @@ const app = express()
 app.set("port", process.env.PORT || 3000)
 
 //Middlewares
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cors({
-    origin: '*'
+  origin: '*'
 }))
 app.use(passport.initialize())
 
 //Rutas
-import {cliente, empleado, auth, flota, servicio, vehiculo} from "@Router"
 
-app.use("/api", cliente)
-app.use("/api", empleado)
-app.use("/api", auth)
-app.use("/api", flota)
-app.use("/api", servicio)
-app.use("/api", vehiculo)
+app.use("/", router);
 
 //iniciar servidor
 app.listen(app.get("port"), () => {
-    console.log("Servidor ejecutandose en el puerto:", app.get("port"))
+  console.log("Servidor ejecutandose en el puerto:", app.get("port"))
 })
