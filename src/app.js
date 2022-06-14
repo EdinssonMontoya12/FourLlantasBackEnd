@@ -27,7 +27,7 @@ app.use(passport.initialize())
 
 //Rutas
 
-app.use("/", router);
+app.use("/api", router);
 
 //iniciar servidor
 app.listen(app.get("port"), () => {
