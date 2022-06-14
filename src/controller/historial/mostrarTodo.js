@@ -7,6 +7,9 @@ import pool from "@DB/connection"
 
     for (const orden of ordenes) {
       const servicios = await obtenerOrdenesServicios(orden.id);
+      const mecanico = await obtenerMecanico(orden.id_mecanico);
+      orden.mecanico = mecanico;
+
       let total = 0;
       let array = [];
 
@@ -26,7 +29,7 @@ import pool from "@DB/connection"
       });
 
       orden.servicios = array;
-      orden.valor_total = total;
+      orden.total = total;
       historial.push(orden);
     }
 
@@ -48,4 +51,25 @@ function obtenerOrdenesServicios(orden){
     inner join servicios s on s.id = ss.id_servicio
     where os.id_orden = ?
   `, [orden]);
+}
+
+async function obtenerMecanico(id){
+  const result = await pool.query(`
+    select
+      m.id,
+      e.nombres,
+      e.apellidos
+    from
+      mecanicos m
+      inner join empleados e on m.cc_empleado = e.cedula
+    where m.id = ?
+  `, [id]);
+
+  const mecanico = {
+    id: result[0].id,
+    nombres: result[0].nombres,
+    apellidos: result[0].apellidos,
+  }
+
+  return mecanico;
 }
