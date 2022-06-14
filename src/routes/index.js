@@ -7,6 +7,7 @@ import flota from "./flota"
 import servicio from "./servicio"
 import vehiculo from "./vehiculo"
 import historial from "./historial"
+import ordenes from "./ordenes"
 
 const router = Router();
 
@@ -17,5 +18,6 @@ router.use('/flotas', flota);
 router.use('/servicios', servicio);
 router.use('/vehiculos', vehiculo);
 router.use('/historial', historial);
+router.use('/ordenes', ordenes);
 
 export default router;
