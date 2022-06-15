@@ -1,7 +1,7 @@
 import crearUno from "./crearUno"
 //import editarUno from "./editarUno"
 import mostrarUno from "./mostrarUno"
-import mostrarTodo from "../servicio/mostrarTodo"
+import mostrarTodo from "./mostrarTodo"
 
 export {
     crearUno, 
