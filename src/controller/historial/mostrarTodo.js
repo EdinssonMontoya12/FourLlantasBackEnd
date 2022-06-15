@@ -30,7 +30,10 @@ import pool from "@DB/connection"
 
       orden.servicios = array;
       orden.total = total;
-      historial.push(orden);
+      
+      if(orden.servicios.length > 0) {
+        historial.push(orden);
+      }
     }
 
     res.json(historial);
