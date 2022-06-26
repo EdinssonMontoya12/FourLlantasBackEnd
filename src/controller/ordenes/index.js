@@ -1,3 +1,2 @@
-import crearUno from "./crearUno";
-
-export default { crearUno };
+export * from './crearUno';
+export * from './mostrarTodoPorCliente'

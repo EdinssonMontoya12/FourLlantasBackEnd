@@ -1,6 +1,6 @@
-import pool from "@DB/connection"
+import pool from "@database/connection"
 
 export default async (req, res) => {
-    const empleados = await pool.query("select * from clientes where es_flota = 0")
-    res.status(200).json(empleados)
+  const [empleados] = await pool.query("select * from clientes")
+  res.status(200).json(empleados)
 }

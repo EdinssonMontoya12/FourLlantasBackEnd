@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ingresar from "@Controller/auth/ingresar"
+import ingresar from "@controllers/auth/ingresar"
 
 const router = new Router()
 

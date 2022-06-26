@@ -7,9 +7,9 @@ import "module-alias/register"
 //Importar passport para autentificación
 import passport from "passport"
 //Importar configuracion de passport
-import "@Middleware/auth/passport"
+import "@middleware/auth/passport"
 
-import router from "@Router"
+import router from "@router"
 
 //Inicilizar
 const app = express()
@@ -26,7 +26,7 @@ app.use(cors({
 app.use(passport.initialize())
 
 //Rutas
-app.use("/api", router);
+app.use(router);
 
 //iniciar servidor
 app.listen(app.get("port"), () => {

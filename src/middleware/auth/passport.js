@@ -1,7 +1,7 @@
 import passport from "passport"
 import { Strategy } from "passport-local"
-import pool from "@DB/connection"
-import {encryptPassword, matchPassword} from "@Middleware/auth/bcrypt"
+import pool from "@database/connection"
+import {encryptPassword, matchPassword} from "@middleware/auth/bcrypt"
 
 passport.use('local.ingreso', new Strategy({
     passReqToCallback: true

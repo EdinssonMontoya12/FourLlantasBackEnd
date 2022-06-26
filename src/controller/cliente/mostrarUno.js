@@ -1,7 +1,19 @@
-import pool from "@DB/connection"
+import pool from '@database/connection';
 
 export default async (req, res) => {
-    const {id} = req.params
-    const empleado = await pool.query('select * from clientes where cedula=?', [id])
-    res.status(200).json(empleado)
-}
+  try {
+    const { id } = req.params;
+    const [rows] = await pool.query('select * from clientes where cedula=?', [
+      id
+    ]);
+
+    if (rows.length === 0) {
+      return res.sendStatus(404);
+    }
+
+    res.status(200).json(rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+};

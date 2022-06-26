@@ -1,11 +1,11 @@
-import pool from "@DB/connection"
+import pool from "@database/connection"
 
 export default async (req, res) => {
-    let {nombre, valor} = req.body
-    let servicio = {
-        nombre,
-        valor_unit: valor
-    }
-    await pool.query('insert into servicios set ?', [servicio])
-    res.status(200).json(flota)    
+  let { nombre, valor } = req.body
+  let servicio = {
+    nombre,
+    precio: valor
+  }
+  await pool.query('insert into servicios set ?', [servicio])
+  res.status(200).json(servicio)
 }

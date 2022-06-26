@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { mostrarTodo, mostrarUno, crearUno, desactivarUno } from "@Controller/empleado"
+import * as controllers from "@controllers/empleado"
 
 const router = Router()
 
-router.get('/', mostrarTodo)
-router.get('/:id', mostrarUno)
-router.post('/', crearUno)
-router.put('/:id', desactivarUno)
-//router.put('/empleado/editar', editarUno)
+router.get('/', controllers.mostrarTodo)
+router.get('/:id', controllers.mostrarUno)
+router.post('/', controllers.crearUno)
+router.put('/:id', controllers.editarUno)
+router.delete('/:id', controllers.desactivarUno)
 
 export default router

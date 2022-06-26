@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import * as controllers from '@controllers/cliente';
+import * as controllers from '@controllers/sedes';
 
-const router = new Router();
+const router =  Router();
 
 router.get('/', controllers.mostrarTodo);
 router.get('/:id', controllers.mostrarUno);
 router.post('/', controllers.crearUno);
-router.delete('/:id', controllers.desactivarUno);
 router.put('/:id', controllers.editarUno);
+router.delete('/:id', controllers.desactivarUno);
 
 export default router;
