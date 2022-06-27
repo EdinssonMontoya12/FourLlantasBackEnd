@@ -1,4 +1,5 @@
 import pool from '@database/connection';
+import { encryptPassword } from '@middleware/auth/bcrypt';
 
 export default async (req, res) => {
   try {
@@ -20,7 +21,12 @@ export default async (req, res) => {
       return res.status(400).json({ message: 'El correo ya está registrado' });
     }
 
-    const { cedula, ...rest } = req.body;
+    const { cedula, contrasena, ...rest } = req.body;
+
+    if (contrasena && contrasena.trim().length > 0) {
+      rest.contrasena = await encryptPassword(contrasena);
+    }
+
     await pool.query('update clientes set ? where cedula = ?', [rest, id]);
     res.sendStatus(200);
   } catch (error) {

@@ -1,49 +1,60 @@
 import pool from '@database/connection';
 //import passport from "passport"
-import { encryptPassword, matchPassword } from '@middleware/auth/bcrypt';
+import { encryptPassword } from '@middleware/auth/bcrypt';
 
 export default async (req, res) => {
-  const {
-    id_mecanico,
-    cedula,
-    nombre,
-    apellido,
-    correo,
-    contrasena,
-    telefono,
-    fecha_registro,
-    id_sede,
-    rol
-  } = req.body;
-  
-  let activo = 1;
-  let empleado = {
-    cedula,
-    nombres: nombre,
-    apellidos: apellido,
-    correo,
-    contrasena,
-    telefono,
-    fecha_registro,
-    id_sede,
-    id_rol: rol,
-    activo
-  };
-  console.log(empleado);
-  empleado.contrasena = await encryptPassword(contrasena);
-  console.log(empleado);
-  await pool.query('insert into empleados set ?', [empleado]);
-  if (rol == 0) {
-    let mecanico = {
-      id: id_mecanico,
-      cc_empleado: cedula,
-      activo
+  try {
+    const { contrasena } = req.body;
+
+    const empleado = {
+      cedula: req.body.cedula,
+      codigo: req.body.codigo,
+      nombres: req.body.nombres,
+      apellidos: req.body.apellidos,
+      correo: req.body.correo,
+      telefono: req.body.telefono,
+      id_sede: req.body.id_sede,
+      id_rol: 0,
+      activo: 1
     };
-    console.log('Es un mecanico');
-    console.log(mecanico);
-    await pool.query('insert into mecanicos set ?', [mecanico]);
+
+    let result = await pool.query('select cedula from empleados where cedula = ?', [
+      empleado.cedula
+    ]);
+
+    if (result[0].length > 0) {
+      return res.status(400).json({
+        message: 'El empleado ya está registrado'
+      });
+    }
+
+    result = await pool.query('select correo from empleados where correo = ?', [
+      empleado.correo
+    ]);
+
+    if (result[0].length > 0) {
+      return res.status(400).json({
+        message: 'El correo ya está registrado.'
+      });
+    }
+
+    result = await pool.query('select telefono from empleados where telefono = ?', [
+      empleado.telefono
+    ]);
+
+    if (result[0].length > 0) {
+      return res.status(400).json({
+        message: 'El teléfono ya está registrado.'
+      });
+    }
+
+    empleado.contrasena = await encryptPassword(contrasena);
+    await pool.query('insert into empleados set ?', [empleado]);
+    delete empleado.contrasena;
+
+    res.status(200).json(empleado);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
   }
-  delete empleado.contrasena;
-  console.log(empleado);
-  res.status(200).json(empleado);
 };

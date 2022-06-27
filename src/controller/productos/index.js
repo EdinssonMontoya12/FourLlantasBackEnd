@@ -40,7 +40,7 @@ export async function crearUno(req, res) {
 
 export async function editarUno(req, res) {
   try {
-    const { precio, cantidad, activo } = req.body;
+    const { precio, activo } = req.body;
 
     const [rows] = await pool.query('select * from productos where id = ?', [
       req.params.id
@@ -51,8 +51,8 @@ export async function editarUno(req, res) {
     }
 
     await pool.query(
-      'update productos set precio = ?, cantidad = ?, activo = ? where id = ?',
-      [precio, cantidad, activo, req.params.id]
+      'update productos set precio = ?, activo = ? where id = ?',
+      [precio, activo, req.params.id]
     );
 
     res.sendStatus(200);
