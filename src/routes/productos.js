@@ -4,6 +4,7 @@ import * as controllers from "@controllers/productos";
 const router = Router();
 
 router.get('/', controllers.mostrarTodo);
+router.get('/sede/:id', controllers.mostrarTodosPorSede);
 router.get('/:id', controllers.mostrarUno);
 router.post('/', controllers.crearUno);
 router.put('/:id', controllers.editarUno);

@@ -66,3 +66,26 @@ export async function desactivarUno(req, res) {
   pool.query('update productos set activo = 0 where id = ?', [req.params.id]);
   res.sendStatus(200);
 }
+
+export async function mostrarTodosPorSede(req, res) {
+  try {
+    const [rows] = await pool.query(
+      `
+      select
+        p.*,
+        ps.cantidad
+      from
+        productos p
+        inner join productos_sedes ps on p.id = ps.id_producto
+      where
+        ps.id_sede = ?
+    `,
+      [req.params.id]
+    );
+
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+}
