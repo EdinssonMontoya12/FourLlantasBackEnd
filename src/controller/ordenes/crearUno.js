@@ -29,7 +29,7 @@ export async function crearUno(req, res) {
     let total = 0;
 
     for (const s of servicios) {
-      const { id_servicio, cantidad } = s;
+      const { id, cantidad } = s;
 
       const [result] = await pool.query(
         `
@@ -38,7 +38,7 @@ export async function crearUno(req, res) {
           where ss.id_servicio = ?
           and ss.id_sede = ?
         `,
-        [id_servicio, id_sede]
+        [id, id_sede]
       );
 
       const ss = result[0];
@@ -83,8 +83,8 @@ export async function crearUno(req, res) {
       }
 
       await pool.query(
-        'update productos_sedes set cantidad = cantidad - ? where id = ?',
-        [p.cantidad, productoSede.id]
+        'update productos_sedes set cantidad = cantidad - ? where id_producto = ? and id_sede = ?',
+        [p.cantidad, productoSede.id, id_sede]
       );
       
       await pool.query(
