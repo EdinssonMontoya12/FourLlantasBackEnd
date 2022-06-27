@@ -110,8 +110,8 @@ export async function editarUno(req, res) {
     await pool.query('COMMIT');
     return res.sendStatus(200);
   } catch (error) {
-    await pool.query('ROLLBACK');
     console.error(error);
+    await pool.query('ROLLBACK');
     res.sendStatus(500);
   }
 }

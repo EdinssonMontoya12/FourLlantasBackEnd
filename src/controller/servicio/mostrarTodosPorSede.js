@@ -5,11 +5,10 @@ export default async (req, res) => {
     const [rows] = await pool.query(
       `
       select
-        *
+        sv.*
       from
         servicios sv
         inner join servicios_sedes ss on sv.id = ss.id_servicio
-      where ss.id_sede = ?
     `,
       [req.params.id]
     );
